@@ -1,0 +1,15 @@
+body {
+  margin: 0px;
+  display: flex;
+  flex-direction: column;
+}
+
+header {
+  background-color: khaki;
+  height: 100px;
+  padding: 20px;
+}
+
+main {
+  padding: 20px;
+}
