@@ -7,7 +7,7 @@
 @section('main')
    <section class="profile">
        <header>
-           <h2>Profil Client</h2>
+           <h2>Profil Producteur</h2>
        </header>
        <section class="personal">
            <h3>{{ $producer->type->first_name.' '.$producer->type->last_name }}</h3>

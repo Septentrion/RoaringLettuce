@@ -14,6 +14,14 @@
                     @include('fragments.connexion')
                 </aside>
             </section>
+            {{--  Intégration de notification sous formes de « messages flash » --}}
+            <div class="flash">
+                @if(Session::has('success'))
+                    <div class="alert alert-success">
+                        {{Session::get('success')}}
+                    </div>
+                @endif
+            </div>
         </header>
         <main>
             <section id="errors">
