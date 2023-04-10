@@ -18,13 +18,13 @@ class Delivery extends Model
     protected $fillable = [
         'address',
         'city',
-        'start_ate',
-        'end_date'
+        'start_time',
+        'end_time'
     ];
 
     protected $casts = [
-        'start_ate' => 'datetime',
-        'end_date' => 'datetime'
+        'start_time' => 'datetime',
+        'end_time' => 'datetime'
     ];
 
     /**
