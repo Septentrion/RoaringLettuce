@@ -46,21 +46,30 @@ class BasketController extends Controller
     /**
      * Store a newly created resource in storage.
      *
+     * Ce contrôleur importe un __service__ (fictif) grâce à l'injection de dépendances
+     * Les contrôleurs sont globalement les seules classes à ademettre l'injection en dehors du constructeur
+     *
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\RedirectResponse
      */
     public function store(Request $request, BasketPriceCalculator $calculator)
     {
-//        var_dump($request->only(['reference', 'basket_type'])); die;
         $basket = new Basket();
         $basket->fill($request->only(['reference', 'basket_type']));
         $basket->basketType()->associate(BasketType::find($request->basket_type));
         $basket->save();
         $builder = Product::whereIn('id',array_map(function ($item) { return (int)$item; }, $request->products));
-//        $builder  Product::whereIn([1,2,3]);
+//      Exemple : $builder  Product::whereIn([1,2,3]);
         $products = $builder->get();
-        $total = $calculator->compute($products);
+        /*
+         * Insertion de l'association ManyToMany dans la base de données
+         * Tous les objets liés sont associés en même temps
+         */
         $basket->products()->attach($products, ['quantity' => 1]);
+        /*
+         * Appel du service (censé claculer le prix du nouveau panier)
+         */
+        $total = $calculator->compute($products);
 
         return response()
             ->redirectToRoute('basket.list');

@@ -37,7 +37,7 @@ class ProductTypeController extends Controller
      * Store a newly created resource in storage.
      *
      * @param  \App\Http\Requests\StoreProductTypeRequest  $request
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function store(StoreProductTypeRequest $request)
     {
@@ -47,12 +47,13 @@ class ProductTypeController extends Controller
         $basket->fill($request->safe()->only(['name', 'description']));
         $basket->save();
 
-        return response()
-            ->view('model.productTypeList', [
-                'types' => ProductType::all()
-            ])
-            ->withSuccess('Le type de produit a bien été créé');
-
+            return response()
+                ->redirectTo('product_type.list')
+//            /*
+//             * `with` attache un message flash (notification) qui peut être affichée à l'écran
+//             * Les messages flash sont stockés dans la session et ne peuvent servir qu'une seule fois
+//             */
+                ->with('success', 'Le type de produit a bien été créé');
     }
 
     /**
