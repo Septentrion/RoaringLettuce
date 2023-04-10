@@ -41,20 +41,24 @@ Route::get('/', function () {
  */
 
 Route::prefix('product-type')->group(function () {
-    Route::get('/', [ProductTypeController::class, 'index']);
-    Route::get('/{product-type}', [ProductTypeController::class, 'show']);
+    Route::get('/', [ProductTypeController::class, 'index'])
+        ->name('product_type.list');
+    Route::get('/{product-type}', [ProductTypeController::class, 'show'])
+        ->name('product_type.show');
     });
 
 Route::prefix('product')->group(function () {
     Route::get('/', [ProductController::class, 'index'])
-        ->name('product_type.list');
+        ->name('product.list');
     Route::get('/{product}', [ProductController::class, 'show'])
-        ->name('product_type.show');
+        ->name('product.show');
 });
 
 Route::prefix('basket-type')->group(function () {
-    Route::get('/', [BasketTypeController::class, 'index']);
-    Route::get('/{basket-type}', [BasketTypeController::class, 'show']);
+    Route::get('/', [BasketTypeController::class, 'index'])
+        ->name('basket_type.list');
+    Route::get('/{basket-type}', [BasketTypeController::class, 'show'])
+        ->name('basket_type.show');
 });
 
 Route::prefix('producer')->group(function () {
