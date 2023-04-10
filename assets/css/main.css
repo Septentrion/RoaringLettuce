@@ -4,10 +4,27 @@ body {
   flex-direction: column;
 }
 
-header {
+header.layout {
   background-color: khaki;
   height: 100px;
   padding: 20px;
+}
+
+header.layout > section {
+  display: flex;
+}
+
+nav.flat > ul {
+  display: flex;
+}
+
+nav.flat li {
+  display: inline;
+  list-style: none;
+}
+
+nav.flat li:not(:last-of-type):after {
+  content: ' | ';
 }
 
 main {
