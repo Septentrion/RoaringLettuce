@@ -46,8 +46,10 @@ Route::prefix('product-type')->group(function () {
     });
 
 Route::prefix('product')->group(function () {
-    Route::get('/', [ProductController::class, 'index']);
-    Route::get('/{product}', [ProductController::class, 'show']);
+    Route::get('/', [ProductController::class, 'index'])
+        ->name('product_type.list');
+    Route::get('/{product}', [ProductController::class, 'show'])
+        ->name('product_type.show');
 });
 
 Route::prefix('basket-type')->group(function () {
