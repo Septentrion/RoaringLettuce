@@ -56,6 +56,8 @@ class BasketType extends Model
      */
     public function producer(): BelongsTo
     {
-        return $this->belongsTo(Producer::class);
+        return $this
+            ->belongsTo(Producer::class)
+            ->withPivot('quantity');
     }
 }
