@@ -67,8 +67,39 @@ Le dossier `app/Http/Controllers` contient diverses classes de contrôleurs pour
 
 Vous trouverez dans le dossier `app/Http/Request` des classes implémentant la logique de validation des données de formulaires. Bien que cette logique puisse être directement intégrée dans les contrôleurs, il semble une meilleure pratique de séparer les deux.
 
+Dans le dossier `app\Rules`, vous trouverez une classe `SanitizeText`, qui est une règle de validattion personnalisée, qui est utilisée pour valider les textes saisis par les utilisateurs. Un exemple est donné dans `StoreProducttypeRequest`, qui teste le types de produits.
+
+
 ## La gestion des utilisateurs
 
 ### Authentification
 
+Le dossier `app/Controllers/Auth` contient une procédure d'authentification minimale (il manque quelques fonctionnalités comme la perte de mot de passe).
+
+Dans le fichier `routes/web.php`, vous verrez un exemple de redirection automatique avec le middleware `auth`.
+
+> **Note** `auth` est le middleware qui gère l'authentification, par le biais de `guards`. Cela permet notamment l'authentification multiple (plusieurs catégories d'utilisateurs, ou plusieurs modes d'accès à l'application)
+
 ### Autorisation (droits d'accès)
+
+La gestion des droits d'accès peut être faite par plusieurs canaux.
+
+#### Gates et Policies
+
+Tout d'abord en créant des objets `Gate` qui définissent un filtre d'accès (principalement par son nom) et renvoient vers une procédure. Cesq `Gate`sont définis dans le fichier `app/Providers/AuthServiceProvider.php`.
+
+Les procédures (règles) de filtrage peuvent être implémentées dans des `Policies`. Vous trouverez deux exemples dans le dossier `app/Policies`.
+
+Le filtrage est effectué en interrogeant le `Gate`(-keeper) dans le contrôleur qui gère l'accès (par exempple avec la méthode `allows`). Le cycle est donc mis en œuvre avant que l'autorisation soit donnée ou refusée
+
+#### Middleware
+
+Le « middleware » (intergiciel en français) traite la requête entre sa réception et l'initialisation du cycle de la requête. Il avorte celle-ci beaucoup plus tôt dans la chaîne des traitements.
+
+Le _middleware_ joue d'autres rôles ue la gestion des droits :
+- authentification
+- transformations et préparations diverses de données de la requête
+
+Vous trouverez :
+- dans le fichier `routes/web.php` un exemple de gestion de droits réemployant une `Policy` avec le middleware `can`, ainsi qu'un exemple d'application de vérifications multiples.
+- dans le dossier `app/Http/Middleware` un classe « ad hoc » restreignant l'accès à certaines fonctions aux `Producer`.
