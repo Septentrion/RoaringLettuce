@@ -47,13 +47,13 @@ class ProductTypeController extends Controller
         $basket->fill($request->safe()->only(['name', 'description']));
         $basket->save();
 
-            return response()
-                ->redirectTo('product_type.list')
+        return response()
+            ->redirectToRoute('product_type.list')
 //            /*
 //             * `with` attache un message flash (notification) qui peut être affichée à l'écran
 //             * Les messages flash sont stockés dans la session et ne peuvent servir qu'une seule fois
 //             */
-                ->with('success', 'Le type de produit a bien été créé');
+            ->with('success', 'Le type de produit a bien été créé');
     }
 
     /**
