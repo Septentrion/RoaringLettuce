@@ -32,6 +32,7 @@ class CreateBasketTable extends Migration
             $table->unsignedBigInteger('basket_id');
             $table->foreign('product_id')->references('id')->on('products');
             $table->foreign('basket_id')->references('id')->on('baskets');
+            $table->integer('quantity')->default(1);
         });
 
         /*

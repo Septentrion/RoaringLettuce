@@ -21,7 +21,7 @@ class CreateProductsTable extends Migration
             $table->timestamps();
             $table->string('name');
             $table->string('unit')->default('piece');
-            $table->double('unitPrice');
+            $table->double('unit_price');
             $table->text('description')->nullable();
             $table->string('image')->nullable();
             $table->string('season');

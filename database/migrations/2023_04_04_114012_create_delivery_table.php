@@ -21,8 +21,8 @@ class CreateDeliveryTable extends Migration
             $table->timestamps();
             $table->string('address');
             $table->string('city');
-            $table->dateTime('startTime');
-            $table->datetime('endTime');
+            $table->dateTime('start_time');
+            $table->datetime('end_time');
         });
 
         /*
@@ -38,10 +38,8 @@ class CreateDeliveryTable extends Migration
         /*
          * Création de la table de liaison entre les paniers et kes livraisons.
          */
-        Schema::create('basket_dellivery', function(Blueprint $table) {
-            $table->unsignedBigInteger('basket_id');
+        Schema::table('basket', function(Blueprint $table) {
             $table->unsignedBigInteger('delivery_id');
-            $table->foreign('basket_id')->references('id')->on('baskets');
             $table->foreign('delivery_id')->references('id')->on('deliveries');
         });
     }

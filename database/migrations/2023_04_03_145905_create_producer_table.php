@@ -27,7 +27,7 @@ class CreateProducerTable extends Migration
          * Insertion de la clef étrangère
          */
         Schema::table('basket_types', function (Blueprint $table) {
-            $table->unsignedBigInteger('producer_id');
+            $table->unsignedBigInteger('producer_id')->nullable();
 //            $table->foreign('producer_id')->references('id')->on('producer');
         });
     }

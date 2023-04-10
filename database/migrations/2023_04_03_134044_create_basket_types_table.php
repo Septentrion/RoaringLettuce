@@ -30,9 +30,9 @@ class CreateBasketTypesTable extends Migration
          * Cette table se distingue par les deux clefs étrangères antagonistes
          * On remarque aussi que cette table contient une information complémentaire relative à la quantité
          */
-        Schema::create('basket_types_product_types', function(Blueprint $table) {
-            $table->unsignedBigInteger('product_type_id');
-            $table->unsignedBigInteger('basket_type_id');
+        Schema::create('basket_type_product_type', function(Blueprint $table) {
+            $table->unsignedBigInteger('product_type_id')->nullable();
+            $table->unsignedBigInteger('basket_type_id')->nullable();
             $table->foreign('product_type_id')->references('id')->on('product_types');
             $table->foreign('basket_type_id')->references('id')->on('basket_types');
             $table->double('quantity')->default(1);

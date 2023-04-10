@@ -19,8 +19,8 @@ class UpdateUserTable extends Migration
          * (dont le nom est ici : `typeable`)
          */
         Schema::table('users', function (Blueprint $table) {
-            $table->unsignedBigInteger('typeable_id');
-            $table->string('typeable_type');
+            $table->unsignedBigInteger('typeable_id')->nullable();
+            $table->string('typeable_type')->nullable();
         });
     }
 
